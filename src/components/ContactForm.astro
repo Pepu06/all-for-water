@@ -61,19 +61,17 @@
   </form>
 </section>
 
-<script>
+<script is:inline>
   import Toastify from "toastify-js";
   document
     .getElementById("contactForm")
     .addEventListener("submit", async function (event) {
-      const name = (document.getElementById("name") as HTMLInputElement).value;
-      const message = (
-        document.getElementById("message") as HTMLTextAreaElement
-      ).value;
-      const email = (document.getElementById("email") as HTMLInputElement)
-        .value;
-      const phone = (document.getElementById("phone") as HTMLInputElement)
-        .value;
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const message = document.getElementById("message").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
 
       const data = {
         name: name,
@@ -118,7 +116,7 @@
           }).showToast();
 
           // Clear form fields
-          (document.getElementById("contactForm") as HTMLFormElement).reset();
+          document.getElementById("contactForm").reset();
         } else {
           // Show error toast
           Toastify({
