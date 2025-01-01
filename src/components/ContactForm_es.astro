@@ -61,22 +61,16 @@
   </form>
 </section>
 
-<script>
-  import Toastify from "toastify-js";
+<script type="module">
   document
     .getElementById("contactForm_es")
     .addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      const nombre = (document.getElementById("nombre_es") as HTMLInputElement)
-        .value;
-      const mensaje = (
-        document.getElementById("mensaje_es") as HTMLTextAreaElement
-      ).value;
-      const email = (document.getElementById("email_es") as HTMLInputElement)
-        .value;
-      const tel = (document.getElementById("number_es") as HTMLInputElement)
-        .value;
+      const nombre = document.getElementById("nombre_es").value;
+      const mensaje = document.getElementById("mensaje_es").value;
+      const email = document.getElementById("email_es").value;
+      const tel = document.getElementById("number_es").value;
 
       const data = {
         nombre: nombre,
@@ -85,15 +79,8 @@
         tel: tel,
       };
 
-      // Mostrar toast de carga
-      const loadingToast = Toastify({
-        text: "Enviando mensaje...",
-        duration: -1,
-        close: true,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#3498db",
-      }).showToast();
+      // Mostrar alerta de carga
+      alert("Enviando mensaje...");
 
       try {
         const response = await fetch(
@@ -107,45 +94,22 @@
           }
         );
 
-        // Cerrar el toast de carga
-        loadingToast.hideToast();
-
+        // Verificar respuesta
         if (response.ok) {
-          // Mostrar toast de éxito
-          Toastify({
-            text: "Mensaje enviado exitosamente.",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "#28a745",
-          }).showToast();
+          // Mostrar alerta de éxito
+          alert("Mensaje enviado exitosamente.");
 
           // Vaciar los campos del formulario
-          (
-            document.getElementById("contactForm_es") as HTMLFormElement
-          ).reset();
+          document.getElementById("contactForm_es").reset();
         } else {
-          // Mostrar toast de error
-          Toastify({
-            text: "Hubo un error al enviar el mensaje.",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "#dc3545",
-          }).showToast();
+          // Mostrar alerta de error
+          alert("Hubo un error al enviar el mensaje.");
         }
       } catch (error) {
         console.error("Error:", error);
 
-        // Cerrar el toast de carga y mostrar toast de error
-        loadingToast.hideToast();
-        Toastify({
-          text: "Hubo un problema con la solicitud.",
-          duration: 3000,
-          gravity: "top",
-          position: "right",
-          backgroundColor: "#dc3545",
-        }).showToast();
+        // Mostrar alerta de error
+        alert("Hubo un problema con la solicitud.");
       }
     });
 </script>

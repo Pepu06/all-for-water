@@ -61,8 +61,7 @@
   </form>
 </section>
 
-<script is:inline>
-  import Toastify from "toastify-js";
+<script type="module">
   document
     .getElementById("contactForm")
     .addEventListener("submit", async function (event) {
@@ -80,15 +79,8 @@
         tel: phone,
       };
 
-      // Show loading toast
-      const loadingToast = Toastify({
-        text: "Sending message...",
-        duration: -1,
-        close: true,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#3498db",
-      }).showToast();
+      // Show loading alert
+      alert("Sending message...");
 
       try {
         const response = await fetch(
@@ -102,43 +94,19 @@
           }
         );
 
-        // Close loading toast
-        loadingToast.hideToast();
-
         if (response.ok) {
-          // Show success toast
-          Toastify({
-            text: "Message sent successfully.",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "#28a745",
-          }).showToast();
-
+          // Show success alert
+          alert("Message sent successfully.");
           // Clear form fields
           document.getElementById("contactForm").reset();
         } else {
-          // Show error toast
-          Toastify({
-            text: "There was an error sending the message.",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "#dc3545",
-          }).showToast();
+          // Show error alert
+          alert("There was an error sending the message.");
         }
       } catch (error) {
         console.error("Error:", error);
-
-        // Close loading toast and show error toast
-        loadingToast.hideToast();
-        Toastify({
-          text: "There was a problem with the request.",
-          duration: 3000,
-          gravity: "top",
-          position: "right",
-          backgroundColor: "#dc3545",
-        }).showToast();
+        // Show error alert
+        alert("There was a problem with the request.");
       }
     });
 </script>
