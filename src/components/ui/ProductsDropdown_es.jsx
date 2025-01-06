@@ -43,7 +43,7 @@ const ProductsDropdown = ({ items }) => {
         {sortedItems?.map((item) => (
           <a
             key={item.id}
-            href={`/${item.nombre}`}
+            href={`/es/${item.nombre}`}
             className="block px-4 py-2 hover:scale-110 transition-all"
           >
             <p>{item.nombre}</p>
